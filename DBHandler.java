@@ -1,0 +1,8 @@
+/**
+ *
+ * @author johan
+ */
+class DBHandler {
+    
+    
+}
