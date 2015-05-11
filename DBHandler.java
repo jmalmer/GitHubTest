@@ -1,8 +1,0 @@
-/**
- *
- * @author johan
- */
-class DBHandler {
-    
-    
-}
