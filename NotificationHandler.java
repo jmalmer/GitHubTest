@@ -1,7 +1,0 @@
-/**
- *
- * @author johan
- */
-class NotificationHandler {
-    
-}
