@@ -1,8 +1,9 @@
 package miljoboven;
 
 /**
- *
- * @author johan
+ * 
+ * @author Johan
+ * @version 2015-05-11
  */
 public class User {
     
@@ -11,6 +12,6 @@ public class User {
     
     public User(String username, char[] password) {
         this.username = username;
-        
+        this.password = password.clone();
     }
 }
