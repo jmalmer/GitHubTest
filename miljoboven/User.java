@@ -1,5 +1,7 @@
 package miljoboven;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author Johan
@@ -13,5 +15,10 @@ public class User {
     public User(String username, char[] password) {
         this.username = username;
         this.password = password.clone();
+    }
+    
+    public boolean verifyPassword(String username, char[] password) {
+        return username.equals(this.username) && 
+                Arrays.equals(password, this.password);
     }
 }
