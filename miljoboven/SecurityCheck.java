@@ -8,7 +8,7 @@ package miljoboven;
 public class SecurityCheck {
     
     // Data för prototyp
-    private final User[] users = { 
+    private static final User[] users = { 
         new User("johan", "password".toCharArray()),
         new User("kristoffer", "password".toCharArray())
     };
@@ -23,7 +23,8 @@ public class SecurityCheck {
     public User verifyLogin(String username, char[] password) {
         User user = null;
         for (User u : users) {
-            if (u.verifyPassword(username, password)) {
+            if (username.equals(u.getUsername()) && 
+                    u.verifyPassword(password)) {
                 user = u;
             }
         }
