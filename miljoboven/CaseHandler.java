@@ -1,21 +1,21 @@
 package miljoboven;
 
-
 import java.util.List;
 
 /**
  *
- * @author johan
+ * @author Johan
+ * @version 2015-05-16
  */
 public class CaseHandler {
-    
+
     private List<Case> caseList;
     private DBHandler dbHandler;
     private NotificationHandler notificationHandler;
     private User user;
-    
+
     public CaseHandler() {
-        
+
     }
 
     public List<Case> getCaseList() {
@@ -46,9 +46,13 @@ public class CaseHandler {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public startPageUI login(String username, char[] password) {
+        user = SecurityCheck.verifyLogin(username, password);
+        return null; // TODO
     }
     
-    
+    public void confirmLogout() {
+        user = null;
+    }
+
 }
