@@ -48,7 +48,23 @@ public class CaseHandler {
     public User getUser() {
         return user;
     }
-
+    
+    /**
+     * Returns Case object with id. If no case with the id exists the method
+     * will return null.
+     * @param id
+     * @return Selected Case or null if no Case with ID is found.
+     */
+    public Case getCase(int id) {
+        Case selectedCase = null;
+        for (Case c : caseList) {
+            if (c.getCaseID() == id) {
+                selectedCase = c;
+            }
+        }
+        return selectedCase;
+    }
+    
     /**
      * Creates a new Case-object and adds it to the dbHandler.
      * If not logged in no object is created.
