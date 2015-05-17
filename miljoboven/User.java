@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class User {
     
-    private String username;
+    private final String username;
     private char[] password;
     
     /**
