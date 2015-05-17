@@ -1,5 +1,6 @@
 package miljoboven;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,21 +10,22 @@ import java.util.List;
  */
 public class CaseHandler {
 
-    private List<Case> caseList;
+    private ArrayList<Case> caseList;
     private DBHandler dbHandler;
     private NotificationHandler notificationHandler;
     private User user;
     private Case currentCase;
 
     public CaseHandler() {
-
+        dbHandler = new DBHandler();
+        caseList = dbHandler.fetchCases();
     }
 
-    public List<Case> getCaseList() {
+    public ArrayList<Case> getCaseList() {
         return caseList;
     }
 
-    public void setCaseList(List<Case> caseList) {
+    public void setCaseList(ArrayList<Case> caseList) {
         this.caseList = caseList;
     }
 
@@ -64,9 +66,19 @@ public class CaseHandler {
             currentCase = new Case(user, location, violationType, date, citizen, misc);
             caseID = currentCase.getCaseID();
             dbHandler.addCase(currentCase);
+            caseList.add(currentCase);
         }
         return caseID;
     }
+    
+    /**
+     * Returns the list of the current Cases.
+     * @return List of current Cases.
+     */
+    public ArrayList<Case> showCases() {
+        return caseList;
+    }
+    
     
     /**
      * Log in user.

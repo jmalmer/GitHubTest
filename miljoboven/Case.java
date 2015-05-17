@@ -4,7 +4,7 @@ package miljoboven;
  *
  * @author johan
  */
-class Case {
+public class Case implements Cloneable {
     
     private String department;
     private int caseID;
@@ -63,6 +63,10 @@ class Case {
         return nextCaseID;
     }
     
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     
     
 }
