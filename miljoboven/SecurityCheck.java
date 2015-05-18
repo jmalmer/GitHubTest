@@ -20,15 +20,15 @@ public class SecurityCheck {
      * @param password The User's password
      * @return The User with the corresponding username and password or null
      */
-    public static User verifyLogin(String username, char[] password) {
+    public static boolean verifyLogin(String username, char[] password) {
         User user = null;
         for (User u : users) {
             if (username.equals(u.getUsername()) && 
                     u.verifyPassword(password)) {
-                user = u;
+                return true;
             }
         }
-        return user;
+        return false;
     }
            
 }

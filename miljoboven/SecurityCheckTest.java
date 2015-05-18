@@ -12,12 +12,12 @@ package miljoboven;
 public class SecurityCheckTest {
     
     public static void main(String[] args) {
-        User u1 = SecurityCheck.verifyLogin("johan", 
-                "password".toCharArray());
-        if (u1 == null) {
-            System.out.println("Ogiltigt användarnamn eller lösenord");
-        } else {
-            System.out.println("Användarnamn: " + u1.getUsername());
-        }
+//        User u1 = SecurityCheck.verifyLogin("johan", 
+//                "password".toCharArray());
+//        if (u1 == null) {
+//            System.out.println("Ogiltigt användarnamn eller lösenord");
+//        } else {
+//            System.out.println("Användarnamn: " + u1.getUsername());
+//        }
     }
 }

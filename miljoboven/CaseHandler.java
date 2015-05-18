@@ -102,9 +102,8 @@ public class CaseHandler {
      * @param password
      * @return TODO
      */
-    public StartPageUI login(String username, char[] password) {
-        user = SecurityCheck.verifyLogin(username, password);
-        return null; // TODO
+    public boolean login(String username, char[] password) {
+        return SecurityCheck.verifyLogin(username, password);
     }
     
     public void confirmLogout() {
