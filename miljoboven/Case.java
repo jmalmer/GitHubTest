@@ -12,19 +12,20 @@ public class Case implements Cloneable {
     private String location;
     private String violationType;
     private String date;
-    private String citizen;
+    private String citizenName;
+    private String citizenTele;
     private String misc;
     
     private static int nextCaseID = 1;
 
-    public Case(User caseWorker, String location, String violationType, String date, String citizen, String misc) {
-        this.caseWorker = caseWorker;
+    public Case(String location, String violationType, String date, String citizenName, String citizenTele, String misc) {
         this.location = location;
         this.violationType = violationType;
         this.date = date;
-        this.citizen = citizen;
+        this.citizenName = citizenName;
+        this.citizenTele = citizenTele;
         this.misc = misc;
-        this.caseID = nextCaseID ++;
+        this.caseID = nextCaseID++;
     }
 
     public String getDepartment() {
@@ -52,7 +53,7 @@ public class Case implements Cloneable {
     }
 
     public String getCitizen() {
-        return citizen;
+        return citizenName;
     }
 
     public String getMisc() {

@@ -34,7 +34,7 @@ public class GUI extends javax.swing.JFrame {
         buttonCancel = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         textFieldCitizenName = new javax.swing.JTextField();
-        textFieldCitizenTel = new javax.swing.JTextField();
+        textFieldCitizenTele = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         textFieldViolationType = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
@@ -65,7 +65,6 @@ public class GUI extends javax.swing.JFrame {
         jMenuItemHelp = new javax.swing.JMenuItem();
 
         dialogNewCase.setTitle("Lägg till ny anmälan");
-        dialogNewCase.setLocationByPlatform(true);
         dialogNewCase.setMinimumSize(new java.awt.Dimension(612, 560));
         dialogNewCase.setResizable(false);
 
@@ -73,19 +72,9 @@ public class GUI extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Invånare Namn och Telenummer", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        textFieldCitizenName.setToolTipText("Namn på invånaren");
-        textFieldCitizenName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldCitizenNameActionPerformed(evt);
-            }
-        });
+        textFieldCitizenName.setToolTipText("");
 
-        textFieldCitizenTel.setToolTipText("Telenummer till invånaren");
-        textFieldCitizenTel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldCitizenTelActionPerformed(evt);
-            }
-        });
+        textFieldCitizenTele.setToolTipText("");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -94,20 +83,20 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(textFieldCitizenName, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textFieldCitizenTel, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(textFieldCitizenTele, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldCitizenName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldCitizenTel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldCitizenTele, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Typ av brott", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        textFieldViolationType.setToolTipText("Typ av brott");
+        textFieldViolationType.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,6 +110,7 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Övrig info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        jPanel5.setToolTipText("Övrig info");
 
         textFieldMisc.setColumns(20);
         textFieldMisc.setRows(5);
@@ -139,12 +129,7 @@ public class GUI extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Plats för brott", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        textFieldLocation.setToolTipText("Plats för brott");
-        textFieldLocation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldLocationActionPerformed(evt);
-            }
-        });
+        textFieldLocation.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -167,6 +152,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datum för brott", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
         spinnerDate.setModel(new javax.swing.SpinnerDateModel());
+        spinnerDate.setToolTipText("");
         spinnerDate.setEditor(new javax.swing.JSpinner.DateEditor(spinnerDate, "yyyy-MM-dd"));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -224,10 +210,14 @@ public class GUI extends javax.swing.JFrame {
 
         dialogLogIn.setTitle("Logga in");
         dialogLogIn.setLocation(new java.awt.Point(0, 0));
-        dialogLogIn.setLocationByPlatform(true);
         dialogLogIn.setMaximumSize(new java.awt.Dimension(396, 240));
         dialogLogIn.setMinimumSize(new java.awt.Dimension(396, 240));
         dialogLogIn.setResizable(false);
+        dialogLogIn.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                dialogLogInWindowClosing(evt);
+            }
+        });
 
         buttonLogin.setText("Logga in");
         buttonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +235,7 @@ public class GUI extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Användarnamn", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        textFieldUsername.setToolTipText("Typ av brott");
+        textFieldUsername.setToolTipText("");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -260,7 +250,7 @@ public class GUI extends javax.swing.JFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lösenord", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
-        textFieldPassword.setToolTipText("Typ av brott");
+        textFieldPassword.setToolTipText("");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -307,15 +297,10 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainWindow.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jList1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -354,14 +339,15 @@ public class GUI extends javax.swing.JFrame {
         mainWindowLayout.setVerticalGroup(
             mainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainWindowLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(mainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonShowDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAddCase, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
+
+        getContentPane().add(mainWindow, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         menuFile.setText("File");
 
@@ -382,17 +368,6 @@ public class GUI extends javax.swing.JFrame {
 
         setJMenuBar(menuBarTop);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -404,32 +379,15 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonShowDetailsActionPerformed
 
-    private void textFieldCitizenNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCitizenNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldCitizenNameActionPerformed
-
-    private void textFieldCitizenTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCitizenTelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldCitizenTelActionPerformed
-
-    private void textFieldLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldLocationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldLocationActionPerformed
-
     private void buttonSaveCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveCaseActionPerformed
         int id = caseHandler.addCase(textFieldLocation.getText(), textFieldViolationType.getText(), 
-                spinnerDate.toString(), textFieldCitizenName.getText(), textFieldMisc.getText());
+                spinnerDate.toString(), textFieldCitizenName.getText(), textFieldCitizenTele.getText(), textFieldMisc.getText());
     }//GEN-LAST:event_buttonSaveCaseActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        setVisible(false);
-        dialogLogIn.setVisible(true);
-    }//GEN-LAST:event_formWindowOpened
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
         if(caseHandler.login(textFieldUsername.getText(), textFieldPassword.getText().toCharArray())){
             dialogLogIn.dispose();
-            setVisible(true);
+            setVisible(true);      
         }else {
             JOptionPane.showMessageDialog(null, "Ogiltigt användarnamn eller lösenord.\nVar god försök igen.");            
         }
@@ -438,6 +396,10 @@ public class GUI extends javax.swing.JFrame {
     private void buttonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExitActionPerformed
         System.exit(0); 
     }//GEN-LAST:event_buttonExitActionPerformed
+
+    private void dialogLogInWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogLogInWindowClosing
+        System.exit(0);
+    }//GEN-LAST:event_dialogLogInWindowClosing
 
     /**
      * @param args the command line arguments
@@ -470,9 +432,14 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {              
-                new GUI().setVisible(true);
+                GUI gui = new GUI();
+                gui.setLocationRelativeTo(null);
+                gui.setVisible(false);
+                gui.dialogLogIn.setLocationRelativeTo(null); 
+                gui.dialogLogIn.setVisible(true); 
             }
         });
+
    
     } 
 
@@ -504,7 +471,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenu menuHelp;
     private javax.swing.JSpinner spinnerDate;
     private javax.swing.JTextField textFieldCitizenName;
-    private javax.swing.JTextField textFieldCitizenTel;
+    private javax.swing.JTextField textFieldCitizenTele;
     private javax.swing.JTextField textFieldLocation;
     private javax.swing.JTextArea textFieldMisc;
     private javax.swing.JTextField textFieldPassword;

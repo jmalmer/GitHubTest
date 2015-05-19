@@ -1,7 +1,6 @@
 package miljoboven;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -71,19 +70,20 @@ public class CaseHandler {
      * @param location Location of the violation
      * @param violationType Type of violation
      * @param date Date when the violation was found
-     * @param citizen Name of citizen that has reported the violation
+     * @param citizenName Name of citizen that has reported the violation
+     * @param citizenTele Telephone number of citizen that has reported the violation
      * @param misc Miscellaneous information
      * @return caseID of new Case, 0 if no object was created
      */
     public int addCase(String location, String violationType, String date,
-            String citizen, String misc) {
+            String citizenName, String citizenTele, String misc) {
         int caseID = 0;
-        if (user != null) {
-            currentCase = new Case(user, location, violationType, date, citizen, misc);
-            caseID = currentCase.getCaseID();
-            dbHandler.addCase(currentCase);
-            caseList.add(currentCase);
-        }
+        //if (user != null) { // Jag kommenterar bort det här. Man kommer inte hit om man inte är inloggad.
+        currentCase = new Case(location, violationType, date, citizenName, citizenTele, misc);
+        caseID = currentCase.getCaseID();
+        dbHandler.addCase(currentCase);
+        caseList.add(currentCase);
+        //}
         return caseID;
     }
     
@@ -103,7 +103,11 @@ public class CaseHandler {
      * @return TODO
      */
     public boolean login(String username, char[] password) {
-        return SecurityCheck.verifyLogin(username, password);
+        user = SecurityCheck.verifyLogin(username, password);
+        if(user != null){
+            return true;
+        }
+        return false;
     }
     
     public void confirmLogout() {
