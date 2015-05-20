@@ -302,9 +302,9 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(loginPanelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(100, 100, 100))
                     .addGroup(dialogLogInLayout.createSequentialGroup()
-                        .addComponent(loginButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(loginButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(loginButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(loginButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
                         .addGap(98, 98, 98))))
         );
         dialogLogInLayout.setVerticalGroup(
@@ -514,14 +514,15 @@ public class GUI extends javax.swing.JFrame {
         mainWindowLayout.setHorizontalGroup(
             mainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainWindowLayout.createSequentialGroup()
-                .addContainerGap(523, Short.MAX_VALUE)
-                .addComponent(buttonAddCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(buttonShowDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(mainWindowLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1)
+                .addGroup(mainWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainWindowLayout.createSequentialGroup()
+                        .addContainerGap(523, Short.MAX_VALUE)
+                        .addComponent(buttonAddCase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(buttonShowDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainWindowLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1)))
                 .addGap(20, 20, 20))
         );
         mainWindowLayout.setVerticalGroup(
@@ -541,6 +542,11 @@ public class GUI extends javax.swing.JFrame {
         menuFile.setText("File");
 
         jMenuItemLogout.setText("Logout");
+        jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLogoutActionPerformed(evt);
+            }
+        });
         menuFile.add(jMenuItemLogout);
 
         menuBarTop.add(menuFile);
@@ -620,6 +626,15 @@ public class GUI extends javax.swing.JFrame {
         setTableHeaders();
         clearTable();
     }//GEN-LAST:event_dialogLogInWindowOpened
+
+    private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Vill du logga ut?", 
+                null, JOptionPane.CANCEL_OPTION);
+        if (response == JOptionPane.OK_OPTION) {
+            caseHandler.confirmLogout();
+            dialogLogIn.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemLogoutActionPerformed
     
     private void clearNewCaseDialog(){
         newCaseTextFieldCitizenName.setText(null);
