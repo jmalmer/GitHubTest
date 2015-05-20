@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  *
  * @author Johan
+ * @author Kristoffer
  * @version 2015-05-16
  */
 public class CaseHandler {
@@ -46,6 +47,10 @@ public class CaseHandler {
 
     public User getUser() {
         return user;
+    }
+    
+    public UserType getUserType() {
+        return user.getUserType();
     }
     
     /**

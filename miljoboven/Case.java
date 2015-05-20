@@ -3,6 +3,7 @@ package miljoboven;
 /**
  *
  * @author johan
+ * @author Kristoffer
  */
 public class Case implements Cloneable {
     
@@ -52,9 +53,18 @@ public class Case implements Cloneable {
         return date;
     }
 
-    public String getCitizen() {
+    public String getCitizenName() {
         return citizenName;
     }
+    
+    public String getCitizenTele() {
+        return citizenTele;
+    }
+    
+    public void setMisc(String misc){
+        this.misc = misc;
+    }
+    
 
     public String getMisc() {
         return misc;
