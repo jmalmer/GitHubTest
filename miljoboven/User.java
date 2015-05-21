@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Class for user data.
  * @author Johan
  * @author Kristoffer
- * @version 2015-05-16
+ * @version 2015-05-21
  */
 public class User {
     
@@ -52,5 +52,5 @@ public class User {
     public UserTypeE getUserType() {
         return userType;
     }
-    
+        
 }

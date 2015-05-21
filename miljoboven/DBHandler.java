@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Acts as an interface to a database.
  * @author Johan
- * @version 2015-05-17
+ * @version 2015-05-22
  */
 public class DBHandler {
 
@@ -48,6 +48,16 @@ public class DBHandler {
             }
         }
         return list;
+    }
+
+    /**
+     * Saves changed case to the database.
+     * @param changedCase
+     * @return true if success
+     */
+    public boolean saveCase(Case changedCase) {
+        cases.put(changedCase.getCaseID(), changedCase);
+        return true;
     }
 
 }

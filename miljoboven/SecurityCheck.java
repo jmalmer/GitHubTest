@@ -4,7 +4,7 @@ package miljoboven;
  * Class to check user credentials.
  * @author Johan
  * @author Kristoffer
- * @version 2015-05-16
+ * @version 2015-05-22
  */
 public class SecurityCheck {
     

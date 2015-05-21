@@ -10,22 +10,32 @@ package miljoboven;
  * @author Kristoffer
  */
 public enum DepartmentsE {
-    TECH("Tekniska avloppshanteringen"),
-    CLIMAT("Klimat och Energi"),
-    ECO("Miljö och Hälskoskydd"),
-    FORESTRY("Natur och Skogsvård"),
-    SEWERS("Renhållning och Avfall"),
-    UNKNOWN("");
+    TECH("Tekniska avloppshanteringen", "avlopp@kommunen.se"),
+    CLIMAT("Klimat och Energi", "klimatenergi@kommunen.se"),
+    ECO("Miljö och Hälskoskydd", "miljohalsa@kommunen.se"),
+    FORESTRY("Natur och Skogsvård", "naturskog@kommunen.se"),
+    SEWERS("Renhållning och Avfall", "rehallning@kommunen.se"),
+    UNKNOWN("", "");
     
     private String textForm;
+    private String email;
 
-    private DepartmentsE(String textForm) {
+    private DepartmentsE(String textForm, String email) {
         this.textForm = textForm;
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return textForm;
+    }
+
+    /**
+     * Returns e-mail for the department.
+     * @return e-mail address
+     */
+    public String getEmail() {
+        return email;
     }
 }
 

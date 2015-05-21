@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author Johan
  * @author Kristoffer
- * @version 2015-05-16
+ * @version 2015-05-22
  */
 public class CaseHandler {
 
@@ -19,6 +19,7 @@ public class CaseHandler {
     public CaseHandler() {
         dbHandler = new DBHandler();
         caseList = dbHandler.fetchCases();
+        notificationHandler = new NotificationHandler();
     }
 
     public ArrayList<Case> getCaseList() {
@@ -100,6 +101,18 @@ public class CaseHandler {
         return caseList;
     }
     
+    
+    public boolean saveCase(Case newCase) {
+        String oldDepartment = currentCase.getDepartment();
+        String newDepartment = newCase.getDepartment();
+        currentCase = newCase;
+        dbHandler.saveCase(currentCase);
+        
+        if (oldDepartment.equals(newDepartment)) {
+            notificationHandler.createAndSendNotification(currentCase);
+        }
+        return true;
+    }
     
     /**
      * Log in user.

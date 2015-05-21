@@ -1,9 +1,10 @@
 package miljoboven;
 
 /**
- *
- * @author johan
+ * Class that holds data for a case.
+ * @author Johan
  * @author Kristoffer
+ * @version 2015-05-22
  */
 public class Case implements Cloneable {
     
@@ -77,6 +78,14 @@ public class Case implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    /**
+     * Sets department responsible for the case.
+     * @param department
+     */
+    public void setDepartment(String department) {
+        this.department = department;
     }
     
     
