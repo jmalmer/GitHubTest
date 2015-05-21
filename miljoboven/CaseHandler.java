@@ -128,6 +128,9 @@ public class CaseHandler {
         return false;
     }
     
+    /**
+     * Log out user.
+     */
     public void confirmLogout() {
         user = null;
     }
