@@ -736,7 +736,6 @@ public class GUI extends javax.swing.JFrame {
         ArrayList<Case> list = caseHandler.showCases();
         for (Case c : list){
             Vector row = new Vector(); 
-            System.out.println(c.getCaseID());
             row.add(c.getCaseID());
             row.add(c.getDate());
             row.add(c.getLocation());
