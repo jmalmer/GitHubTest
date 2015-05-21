@@ -785,12 +785,12 @@ public class GUI extends javax.swing.JFrame {
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
         if(caseHandler.login(loginTextFieldUsername.getText(), loginPasswordField.getPassword())){
             dialogLogIn.dispose();
-            if(caseHandler.getUserType().equals(UserType.CASEWORKER) || caseHandler.getUserType().equals(UserType.SUPERVISOR)){
+            if(caseHandler.getUserType().equals(UserTypeE.CASEWORKER) || caseHandler.getUserType().equals(UserTypeE.SUPERVISOR)){
                 buttonAddCase.setVisible(false);
             } else {
                 buttonAddCase.setVisible(true);
             }
-            if (caseHandler.getUserType().equals(UserType.COORDINATOR)) {
+            if (caseHandler.getUserType().equals(UserTypeE.COORDINATOR)) {
                 buttonChangeDepartment.setVisible(true);
             } else {
                 buttonChangeDepartment.setVisible(false);
@@ -826,6 +826,9 @@ public class GUI extends javax.swing.JFrame {
                 null, JOptionPane.CANCEL_OPTION);
         if (response == JOptionPane.OK_OPTION) {
             caseHandler.confirmLogout();
+            setVisible(false);
+            loginTextFieldUsername.setText(null);
+            loginPasswordField.setText(null);
             dialogLogIn.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed

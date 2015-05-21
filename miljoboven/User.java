@@ -12,7 +12,7 @@ public class User {
     
     private final String username;
     private char[] password;
-    private UserType userType;
+    private UserTypeE userType;
     
     /**
      * Constructs a new User object with username, password and userType.
@@ -22,7 +22,7 @@ public class User {
      * @param password The User's password
      * @param userType The User type to get correct access
      */
-    public User(String username, char[] password, UserType userType) {
+    public User(String username, char[] password, UserTypeE userType) {
         this.username = username;
         this.password = password.clone();
         this.userType = userType;
@@ -49,7 +49,7 @@ public class User {
      * Gets the userType
      * @return userType
      */
-    public UserType getUserType() {
+    public UserTypeE getUserType() {
         return userType;
     }
     

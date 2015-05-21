@@ -10,9 +10,9 @@ public class SecurityCheck {
     
     // Data för prototyp
     private static final User[] users = { 
-        new User("johan", "password".toCharArray(), UserType.COORDINATOR),
-        new User("kristoffer", "password".toCharArray(), UserType.CASEWORKER),
-        new User("millan", "password".toCharArray(), UserType.SUPERVISOR)
+        new User("johan", "password".toCharArray(), UserTypeE.COORDINATOR),
+        new User("kristoffer", "password".toCharArray(), UserTypeE.CASEWORKER),
+        new User("millan", "password".toCharArray(), UserTypeE.SUPERVISOR)
     };
       
     /**

@@ -9,7 +9,7 @@ package miljoboven;
  *
  * @author Kristoffer
  */
-public enum UserType {
+public enum UserTypeE {
     COORDINATOR, // Miljösammordnare
     SUPERVISOR, // Chef
     CASEWORKER, // Handläggare

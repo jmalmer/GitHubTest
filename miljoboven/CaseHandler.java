@@ -49,7 +49,7 @@ public class CaseHandler {
         return user;
     }
     
-    public UserType getUserType() {
+    public UserTypeE getUserType() {
         return user.getUserType();
     }
     
