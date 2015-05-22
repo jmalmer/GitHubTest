@@ -6,9 +6,15 @@
 package miljoboven;
 
 import java.awt.Dialog;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -22,6 +28,7 @@ import javax.swing.table.TableColumn;
 public class GUI extends javax.swing.JFrame {   
     CaseHandler caseHandler = new CaseHandler();
     static String[] tableHeaders = {"ID","Datum","Plats","Typ av brott"};
+    SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy");
     DefaultTableModel model;
     Case activeCase;
     /**
@@ -76,8 +83,9 @@ public class GUI extends javax.swing.JFrame {
         showDetailsButtonSaveCase = new javax.swing.JButton();
         showDetailsPanelDate = new javax.swing.JPanel();
         showDetailsSpinnerDate = new javax.swing.JSpinner();
-        changeDepartmentPanelDepartment2 = new javax.swing.JPanel();
+        showDetailsPanelDepartment = new javax.swing.JPanel();
         departmentSpinner = new javax.swing.JSpinner();
+        showDetailsComboBoxDepartment = new javax.swing.JComboBox<DepartmentsE>(DepartmentsE.values());
         changeDepartmentPanelDepartment1 = new javax.swing.JPanel();
         departmentSpinner1 = new javax.swing.JSpinner();
         mainWindow = new javax.swing.JPanel();
@@ -97,6 +105,11 @@ public class GUI extends javax.swing.JFrame {
         dialogNewCase.setResizable(false);
 
         newCaseButtonCancel.setText("Avbryt");
+        newCaseButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCaseButtonCancelActionPerformed(evt);
+            }
+        });
 
         newCasePanelCitizen.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Invånare Namn och Telenummer", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
 
@@ -208,9 +221,8 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(newCasePanelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(newCasePanelLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(newCasePanelViolationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(dialogNewCaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(newCasePanelCitizen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(newCasePanelMisc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(newCasePanelCitizen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(newCasePanelMisc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNewCaseLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -307,9 +319,9 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(loginPanelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(100, 100, 100))
                     .addGroup(dialogLogInLayout.createSequentialGroup()
-                        .addComponent(loginButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(loginButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(loginButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(loginButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                         .addGap(98, 98, 98))))
         );
         dialogLogInLayout.setVerticalGroup(
@@ -445,25 +457,29 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(showDetailsSpinnerDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        changeDepartmentPanelDepartment2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Avdelning", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
-        changeDepartmentPanelDepartment2.setToolTipText("Avdelning");
+        showDetailsPanelDepartment.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Avdelning", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
+        showDetailsPanelDepartment.setToolTipText("Avdelning");
 
         departmentSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"Gatukontoret", "Miljöförvaltningen", "Utbildningsförvaltningen"}));
 
-        javax.swing.GroupLayout changeDepartmentPanelDepartment2Layout = new javax.swing.GroupLayout(changeDepartmentPanelDepartment2);
-        changeDepartmentPanelDepartment2.setLayout(changeDepartmentPanelDepartment2Layout);
-        changeDepartmentPanelDepartment2Layout.setHorizontalGroup(
-            changeDepartmentPanelDepartment2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changeDepartmentPanelDepartment2Layout.createSequentialGroup()
+        javax.swing.GroupLayout showDetailsPanelDepartmentLayout = new javax.swing.GroupLayout(showDetailsPanelDepartment);
+        showDetailsPanelDepartment.setLayout(showDetailsPanelDepartmentLayout);
+        showDetailsPanelDepartmentLayout.setHorizontalGroup(
+            showDetailsPanelDepartmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(showDetailsPanelDepartmentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(departmentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(showDetailsComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        changeDepartmentPanelDepartment2Layout.setVerticalGroup(
-            changeDepartmentPanelDepartment2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changeDepartmentPanelDepartment2Layout.createSequentialGroup()
+        showDetailsPanelDepartmentLayout.setVerticalGroup(
+            showDetailsPanelDepartmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(showDetailsPanelDepartmentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(departmentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(showDetailsPanelDepartmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(departmentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(showDetailsComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -479,7 +495,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(showDetailsPanelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(showDetailsPanelLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(showDetailsPanelViolationType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(changeDepartmentPanelDepartment2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(showDetailsPanelDepartment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogShowDetailsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -502,7 +518,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(showDetailsPanelMisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(changeDepartmentPanelDepartment2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(showDetailsPanelDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(dialogShowDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showDetailsButtonCancel)
@@ -629,9 +645,17 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddCaseActionPerformed
 
     private void buttonShowDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowDetailsActionPerformed
-        if (caseTable.getRowCount() != 0){
+        if (caseTable.getRowCount() != 0){            
             int ID = (Integer)model.getValueAt(caseTable.getSelectedRow(), 0);
+
             activeCase = caseHandler.getCase(ID);
+            Date date = null;
+            try {
+                date = dateFormat.parse(activeCase.getDate());
+            } catch (ParseException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            showDetailsSpinnerDate.setValue(date);
             showDetailsTextFieldCitizenName.setText(activeCase.getCitizenName());
             showDetailsTextFieldCitizenTele.setText(activeCase.getCitizenTele());
             showDetailsTextFieldLocation.setText(activeCase.getLocation());
@@ -642,7 +666,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonShowDetailsActionPerformed
 
     private void newCaseButtonSaveCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCaseButtonSaveCaseActionPerformed
-        SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy");
         int id = caseHandler.addCase(newCaseTextFieldLocation.getText(), newCaseTextFieldViolationType.getText(), 
                 dateFormat.format(newCaseSpinnerDate.getValue()), newCaseTextFieldCitizenName.getText(), newCaseTextFieldCitizenTele.getText(), newCaseTextFieldMisc.getText());
         dialogNewCase.setVisible(false);
@@ -652,8 +675,10 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_newCaseButtonSaveCaseActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
-        if(caseHandler.login(loginTextFieldUsername.getText(), loginPasswordField.getPassword())){
-            dialogLogIn.dispose();
+        dialogLogIn.dispose();
+        setVisible(true); 
+//        if(caseHandler.login(loginTextFieldUsername.getText(), loginPasswordField.getPassword())){
+//            dialogLogIn.dispose();
 //            if(caseHandler.getUserType().equals(UserTypeE.CASEWORKER) || caseHandler.getUserType().equals(UserTypeE.SUPERVISOR)){
 //                buttonAddCase.setVisible(false);
 //            } else {
@@ -664,10 +689,10 @@ public class GUI extends javax.swing.JFrame {
 //            } else {
 //                buttonChangeDepartment.setVisible(false);
 //            }
-            setVisible(true);      
-        }else {
-            JOptionPane.showMessageDialog(null, "Ogiltigt användarnamn eller lösenord.\nVar god försök igen.");            
-        }
+//            setVisible(true);      
+//        }else {
+//            JOptionPane.showMessageDialog(null, "Ogiltigt användarnamn eller lösenord.\nVar god försök igen.");            
+//        }
     }//GEN-LAST:event_loginButtonLoginActionPerformed
 
     private void loginButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonExitActionPerformed
@@ -705,8 +730,12 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
     private void showDetailsButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDetailsButtonCancelActionPerformed
-        // TODO add your handling code here:
+        dialogShowDetails.dispose();
     }//GEN-LAST:event_showDetailsButtonCancelActionPerformed
+
+    private void newCaseButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCaseButtonCancelActionPerformed
+        dialogNewCase.dispose();
+    }//GEN-LAST:event_newCaseButtonCancelActionPerformed
     
     private void clearNewCaseDialog(){
         newCaseTextFieldCitizenName.setText(null);
@@ -781,7 +810,8 @@ public class GUI extends javax.swing.JFrame {
                 gui.dialogLogIn.setLocationRelativeTo(null); 
                 gui.dialogNewCase.setLocationRelativeTo(null);
                 gui.dialogShowDetails.setLocationRelativeTo(null);
-                gui.dialogLogIn.setVisible(true);                
+                gui.dialogLogIn.setVisible(true);    
+                //gui.showDetailsComboBoxDepartment.set(DepartmentsE.CLIMAT.toString());
             }
         });
 
@@ -793,7 +823,6 @@ public class GUI extends javax.swing.JFrame {
     private java.awt.Button buttonShowDetails;
     private javax.swing.JTable caseTable;
     private javax.swing.JPanel changeDepartmentPanelDepartment1;
-    private javax.swing.JPanel changeDepartmentPanelDepartment2;
     private javax.swing.JSpinner departmentSpinner;
     private javax.swing.JSpinner departmentSpinner1;
     private javax.swing.JDialog dialogLogIn;
@@ -829,8 +858,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField newCaseTextFieldViolationType;
     private javax.swing.JButton showDetailsButtonCancel;
     private javax.swing.JButton showDetailsButtonSaveCase;
+    private javax.swing.JComboBox showDetailsComboBoxDepartment;
     private javax.swing.JPanel showDetailsPanelCitizen;
     private javax.swing.JPanel showDetailsPanelDate;
+    private javax.swing.JPanel showDetailsPanelDepartment;
     private javax.swing.JPanel showDetailsPanelLocation;
     private javax.swing.JPanel showDetailsPanelMisc;
     private javax.swing.JPanel showDetailsPanelViolationType;

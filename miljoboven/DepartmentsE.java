@@ -10,12 +10,12 @@ package miljoboven;
  * @author Kristoffer
  */
 public enum DepartmentsE {
-    TECH("Tekniska avloppshanteringen", "avlopp@kommunen.se"),
-    CLIMAT("Klimat och Energi", "klimatenergi@kommunen.se"),
+    UNKNOWN("Ej tilldelad", ""),
+    CLIMAT("Klimat och Energi", "klimatenergi@kommunen.se"),   
     ECO("Miljö och Hälskoskydd", "miljohalsa@kommunen.se"),
     FORESTRY("Natur och Skogsvård", "naturskog@kommunen.se"),
-    SEWERS("Renhållning och Avfall", "rehallning@kommunen.se"),
-    UNKNOWN("", "");
+    SEWERS("Renhållning och Avfall", "renhallning@kommunen.se"),
+    TECH("Tekniska avloppshanteringen", "avlopp@kommunen.se");
     
     private String textForm;
     private String email;

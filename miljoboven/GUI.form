@@ -20,10 +20,8 @@
                       <Component id="newCasePanelDate" alignment="0" max="32767" attributes="0"/>
                       <Component id="newCasePanelLocation" alignment="0" max="32767" attributes="0"/>
                       <Component id="newCasePanelViolationType" alignment="0" max="32767" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="newCasePanelCitizen" alignment="0" max="32767" attributes="0"/>
-                          <Component id="newCasePanelMisc" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="newCasePanelCitizen" alignment="0" max="32767" attributes="0"/>
+                      <Component id="newCasePanelMisc" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
@@ -64,6 +62,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Avbryt"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newCaseButtonCancelActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="newCasePanelCitizen">
           <Properties>
@@ -408,7 +409,7 @@
                       <Component id="showDetailsPanelDate" alignment="0" max="32767" attributes="0"/>
                       <Component id="showDetailsPanelLocation" alignment="0" max="32767" attributes="0"/>
                       <Component id="showDetailsPanelViolationType" alignment="0" max="32767" attributes="0"/>
-                      <Component id="changeDepartmentPanelDepartment2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="showDetailsPanelDepartment" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
@@ -435,7 +436,7 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="showDetailsPanelMisc" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="changeDepartmentPanelDepartment2" min="-2" max="-2" attributes="0"/>
+                  <Component id="showDetailsPanelDepartment" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="43" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="showDetailsButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -650,7 +651,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="changeDepartmentPanelDepartment2">
+        <Container class="javax.swing.JPanel" name="showDetailsPanelDepartment">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -666,6 +667,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="departmentSpinner" min="-2" pref="171" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="showDetailsComboBoxDepartment" min="-2" pref="168" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -674,7 +677,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="departmentSpinner" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="departmentSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="showDetailsComboBoxDepartment" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -691,6 +697,16 @@
                   </SpinnerModel>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="showDetailsComboBoxDepartment">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;DepartmentsE&gt;(DepartmentsE.values())"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
