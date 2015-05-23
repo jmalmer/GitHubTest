@@ -9,12 +9,14 @@ import java.util.logging.Logger;
 /**
  * Acts as an interface to a database.
  * @author Johan
+ * @author Kristoffer
  * @version 2015-05-22
  */
 public class DBHandler {
 
     Map<Integer, Case> cases;
-
+    boolean loaded = false;
+    
     public DBHandler() {
         this.cases = new HashMap<>(); // Simulerar en databas
     }
@@ -39,6 +41,10 @@ public class DBHandler {
      * @return List of cases
      */
     public ArrayList<Case> fetchCases() {
+        if(!loaded){
+            //loadFromFile();
+            loaded = true;
+        }
         ArrayList<Case> list = new ArrayList<>();
         for (Case c : cases.values()) {
             try {
@@ -59,5 +65,14 @@ public class DBHandler {
         cases.put(changedCase.getCaseID(), changedCase);
         return true;
     }
-
+    
+    /**
+     * Removes case from the database.
+     * @param removedCase
+     * @return true if success
+     */
+    public boolean removeCase(Case removedCase) {
+        cases.remove(removedCase.getCaseID());
+        return true;
+    }   
 }

@@ -1,6 +1,8 @@
 package miljoboven;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
+
 
 /**
  *
@@ -14,7 +16,6 @@ public class CaseHandler {
     private DBHandler dbHandler;
     private NotificationHandler notificationHandler;
     private User user;
-    private Case currentCase;
 
     public CaseHandler() {
         dbHandler = new DBHandler();
@@ -22,8 +23,24 @@ public class CaseHandler {
         notificationHandler = new NotificationHandler();
     }
 
+    /**
+     * Returns the list of the current Cases.
+     * @return List of current Cases.
+     */
     public ArrayList<Case> getCaseList() {
-        return caseList;
+        caseList = dbHandler.fetchCases();
+        if((user.getDepartment().equals(DepartmentsE.UNKNOWN))){
+            return caseList;
+            
+        } else{
+            ArrayList<Case> caseListTmp = new ArrayList<>();
+            for (Case c : caseList) {
+                if (c.getDepartment() == user.getDepartment()) {
+                    caseListTmp.add(c);
+                }
+            }   
+            return caseListTmp;
+        }   
     }
 
     public void setCaseList(ArrayList<Case> caseList) {
@@ -83,35 +100,27 @@ public class CaseHandler {
      */
     public int addCase(String location, String violationType, String date,
             String citizenName, String citizenTele, String misc) {
-        int caseID = 0;
-        //if (user != null) { // Jag kommenterar bort det här. Man kommer inte hit om man inte är inloggad.
-        currentCase = new Case(location, violationType, date, citizenName, citizenTele, misc);
-        caseID = currentCase.getCaseID();
-        dbHandler.addCase(currentCase);
-        caseList.add(currentCase);
-        //}
+        Case c = new Case(location, violationType, date, citizenName, citizenTele, misc);
+        int caseID = c.getCaseID();
+        dbHandler.addCase(c);
+        caseList.add(c);
         return caseID;
     }
-    
+
     /**
-     * Returns the list of the current Cases.
-     * @return List of current Cases.
+     * Saves the updated case
+     * 
+     * @param currentCase
+     * @param department
+     * @param misc
+     * @return
      */
-    public ArrayList<Case> showCases() {
-        return caseList;
-    }
-    
-    
-    public boolean saveCase(Case newCase) {
-        String oldDepartment = currentCase.getDepartment();
-        String newDepartment = newCase.getDepartment();
-        currentCase = newCase;
-        dbHandler.saveCase(currentCase);
-        
-        if (oldDepartment.equals(newDepartment)) {
-            notificationHandler.createAndSendNotification(currentCase);
-        }
-        return true;
+    public boolean saveCase(Case currentCase, DepartmentsE department, String misc) {
+        currentCase.setDepartment(department);
+        currentCase.setMisc(misc);
+        boolean success = dbHandler.saveCase(currentCase);             
+        notificationHandler.sendNotification(currentCase);
+        return success;
     }
     
     /**
@@ -135,4 +144,18 @@ public class CaseHandler {
         user = null;
     }
 
+    /**
+     * Deletes a case
+     * @param CurrentCase
+     */
+    void deleteCase(Case CurrentCase) {
+        ListIterator listIterator = caseList.listIterator();
+        while(listIterator.hasNext()){
+            Object o = listIterator.next();
+            if(o.equals(CurrentCase)){
+                listIterator.remove();
+            }
+        }
+        dbHandler.removeCase(CurrentCase);
+    }
 }

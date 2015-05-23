@@ -6,7 +6,7 @@ package miljoboven;
  */
 class NotificationHandler {
 
-    void createAndSendNotification(Case currentCase) {
+    void sendNotification(Case currentCase) {
         System.out.println("Avisering om nytt tilldelat ärende skickat till " 
                 + currentCase.getDepartment());
     }

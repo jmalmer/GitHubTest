@@ -8,7 +8,7 @@ package miljoboven;
  */
 public class Case implements Cloneable {
     
-    private String department;
+    private DepartmentsE department;
     private int caseID;
     private User caseWorker;
     private String location;
@@ -27,10 +27,11 @@ public class Case implements Cloneable {
         this.citizenName = citizenName;
         this.citizenTele = citizenTele;
         this.misc = misc;
+        this.department = DepartmentsE.UNKNOWN;
         this.caseID = nextCaseID++;
     }
 
-    public String getDepartment() {
+    public DepartmentsE getDepartment() {
         return department;
     }
 
@@ -84,7 +85,7 @@ public class Case implements Cloneable {
      * Sets department responsible for the case.
      * @param department
      */
-    public void setDepartment(String department) {
+    public void setDepartment(DepartmentsE department) {
         this.department = department;
     }
     

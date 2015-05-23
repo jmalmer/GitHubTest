@@ -5,7 +5,6 @@
  */
 package miljoboven;
 
-import java.awt.Dialog;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,8 +12,6 @@ import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -69,6 +66,7 @@ public class GUI extends javax.swing.JFrame {
         loginTextFieldUsername = new javax.swing.JTextField();
         loginPanelPassword = new javax.swing.JPanel();
         loginPasswordField = new javax.swing.JPasswordField();
+        buttonHelp = new javax.swing.JButton();
         dialogShowDetails = new javax.swing.JDialog();
         showDetailsButtonCancel = new javax.swing.JButton();
         showDetailsPanelCitizen = new javax.swing.JPanel();
@@ -84,10 +82,8 @@ public class GUI extends javax.swing.JFrame {
         showDetailsPanelDate = new javax.swing.JPanel();
         showDetailsSpinnerDate = new javax.swing.JSpinner();
         showDetailsPanelDepartment = new javax.swing.JPanel();
-        departmentSpinner = new javax.swing.JSpinner();
         showDetailsComboBoxDepartment = new javax.swing.JComboBox<DepartmentsE>(DepartmentsE.values());
-        changeDepartmentPanelDepartment1 = new javax.swing.JPanel();
-        departmentSpinner1 = new javax.swing.JSpinner();
+        showDetailsButtonCloseCase = new javax.swing.JButton();
         mainWindow = new javax.swing.JPanel();
         buttonShowDetails = new java.awt.Button();
         buttonAddCase = new java.awt.Button();
@@ -95,10 +91,10 @@ public class GUI extends javax.swing.JFrame {
         caseTable = new javax.swing.JTable();
         menuBarTop = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
-        jMenuItemLogout = new javax.swing.JMenuItem();
+        menuItemLogout = new javax.swing.JMenuItem();
         menuHelp = new javax.swing.JMenu();
-        jMenuItemAbout = new javax.swing.JMenuItem();
-        jMenuItemHelp = new javax.swing.JMenuItem();
+        menuItemAbout = new javax.swing.JMenuItem();
+        menuItemHelp = new javax.swing.JMenuItem();
 
         dialogNewCase.setTitle("Lägg till ny anmälan");
         dialogNewCase.setMinimumSize(new java.awt.Dimension(612, 560));
@@ -286,7 +282,7 @@ public class GUI extends javax.swing.JFrame {
         loginPanelUsername.setLayout(loginPanelUsernameLayout);
         loginPanelUsernameLayout.setHorizontalGroup(
             loginPanelUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(loginTextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+            .addComponent(loginTextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
         );
         loginPanelUsernameLayout.setVerticalGroup(
             loginPanelUsernameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,6 +302,13 @@ public class GUI extends javax.swing.JFrame {
             .addComponent(loginPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        buttonHelp.setText("Hjälp");
+        buttonHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHelpActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dialogLogInLayout = new javax.swing.GroupLayout(dialogLogIn.getContentPane());
         dialogLogIn.getContentPane().setLayout(dialogLogInLayout);
         dialogLogInLayout.setHorizontalGroup(
@@ -317,12 +320,14 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(dialogLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(loginPanelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(loginPanelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(100, 100, 100))
+                        .addGap(95, 95, 95))
                     .addGroup(dialogLogInLayout.createSequentialGroup()
-                        .addComponent(loginButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(loginButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(loginButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                        .addGap(98, 98, 98))))
+                        .addComponent(loginButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 90, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonHelp)
+                        .addGap(3, 3, 3))))
         );
         dialogLogInLayout.setVerticalGroup(
             dialogLogInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,6 +341,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(loginButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(loginButtonExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogLogInLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(buttonHelp))
         );
 
         dialogShowDetails.setTitle("Se detaljer för anmälan");
@@ -460,28 +468,28 @@ public class GUI extends javax.swing.JFrame {
         showDetailsPanelDepartment.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Avdelning", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
         showDetailsPanelDepartment.setToolTipText("Avdelning");
 
-        departmentSpinner.setModel(new javax.swing.SpinnerListModel(new String[] {"Gatukontoret", "Miljöförvaltningen", "Utbildningsförvaltningen"}));
-
         javax.swing.GroupLayout showDetailsPanelDepartmentLayout = new javax.swing.GroupLayout(showDetailsPanelDepartment);
         showDetailsPanelDepartment.setLayout(showDetailsPanelDepartmentLayout);
         showDetailsPanelDepartmentLayout.setHorizontalGroup(
             showDetailsPanelDepartmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(showDetailsPanelDepartmentLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(departmentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(showDetailsComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(showDetailsComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         showDetailsPanelDepartmentLayout.setVerticalGroup(
             showDetailsPanelDepartmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(showDetailsPanelDepartmentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(showDetailsPanelDepartmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(departmentSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showDetailsComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(showDetailsComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        showDetailsButtonCloseCase.setText("Avsluta Ärende");
+        showDetailsButtonCloseCase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showDetailsButtonCloseCaseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogShowDetailsLayout = new javax.swing.GroupLayout(dialogShowDetails.getContentPane());
         dialogShowDetails.getContentPane().setLayout(dialogShowDetailsLayout);
@@ -499,8 +507,10 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogShowDetailsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(showDetailsButtonCloseCase)
+                .addGap(15, 15, 15)
                 .addComponent(showDetailsButtonSaveCase)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addComponent(showDetailsButtonCancel)
                 .addGap(50, 50, 50))
         );
@@ -517,35 +527,14 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(showDetailsPanelCitizen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(showDetailsPanelMisc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(showDetailsPanelDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(dialogShowDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(showDetailsButtonCancel)
-                    .addComponent(showDetailsButtonSaveCase))
+                    .addComponent(showDetailsButtonSaveCase)
+                    .addComponent(showDetailsButtonCloseCase))
                 .addContainerGap())
-        );
-
-        changeDepartmentPanelDepartment1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Avdelning", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
-        changeDepartmentPanelDepartment1.setToolTipText("Avdelning");
-
-        departmentSpinner1.setModel(new javax.swing.SpinnerListModel(new String[] {"Gatukontoret", "Miljöförvaltningen", "Utbildningsförvaltningen"}));
-
-        javax.swing.GroupLayout changeDepartmentPanelDepartment1Layout = new javax.swing.GroupLayout(changeDepartmentPanelDepartment1);
-        changeDepartmentPanelDepartment1.setLayout(changeDepartmentPanelDepartment1Layout);
-        changeDepartmentPanelDepartment1Layout.setHorizontalGroup(
-            changeDepartmentPanelDepartment1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changeDepartmentPanelDepartment1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(departmentSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        changeDepartmentPanelDepartment1Layout.setVerticalGroup(
-            changeDepartmentPanelDepartment1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(changeDepartmentPanelDepartment1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(departmentSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -613,25 +602,36 @@ public class GUI extends javax.swing.JFrame {
 
         getContentPane().add(mainWindow, java.awt.BorderLayout.CENTER);
 
-        menuFile.setText("File");
+        menuFile.setText("Miljöboven");
 
-        jMenuItemLogout.setText("Logout");
-        jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
+        menuItemLogout.setText("Logga ut");
+        menuItemLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemLogoutActionPerformed(evt);
+                menuItemLogoutActionPerformed(evt);
             }
         });
-        menuFile.add(jMenuItemLogout);
+        menuFile.add(menuItemLogout);
 
         menuBarTop.add(menuFile);
 
-        menuHelp.setText("Help");
+        menuHelp.setText("Hjälp");
 
-        jMenuItemAbout.setText("About");
-        menuHelp.add(jMenuItemAbout);
+        menuItemAbout.setText("Om");
+        menuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAboutActionPerformed(evt);
+            }
+        });
+        menuHelp.add(menuItemAbout);
 
-        jMenuItemHelp.setText("Help");
-        menuHelp.add(jMenuItemHelp);
+        menuItemHelp.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        menuItemHelp.setText("Hjälp");
+        menuItemHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemHelpActionPerformed(evt);
+            }
+        });
+        menuHelp.add(menuItemHelp);
 
         menuBarTop.add(menuHelp);
 
@@ -645,9 +645,8 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddCaseActionPerformed
 
     private void buttonShowDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowDetailsActionPerformed
-        if (caseTable.getRowCount() != 0){            
+        if (caseTable.getRowCount() != 0 && caseTable.getSelectedRow() != -1){            
             int ID = (Integer)model.getValueAt(caseTable.getSelectedRow(), 0);
-
             activeCase = caseHandler.getCase(ID);
             Date date = null;
             try {
@@ -661,13 +660,38 @@ public class GUI extends javax.swing.JFrame {
             showDetailsTextFieldLocation.setText(activeCase.getLocation());
             showDetailsTextFieldViolationType.setText(activeCase.getViolationType());
             showDetailsTextFieldMisc.setText(activeCase.getMisc());
+            showDetailsComboBoxDepartment.setSelectedItem(activeCase.getDepartment());
             dialogShowDetails.setVisible(true);
         }       
     }//GEN-LAST:event_buttonShowDetailsActionPerformed
 
     private void newCaseButtonSaveCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCaseButtonSaveCaseActionPerformed
+        String failed = ""; 
+        if(newCaseTextFieldLocation.getText().equals("")){
+            failed += "\nEn plats för brottet";          
+        }
+        if(newCaseTextFieldViolationType.getText().equals("")){
+            failed += "\nVilken typ av överträdelse som skett";          
+        }
+        if(newCaseTextFieldCitizenName.getText().equals("")){
+            failed += "\nAnmälarens namn";          
+        }
+        if(newCaseTextFieldCitizenTele.getText().equals("")){
+            failed += "\nAnmälarens telefonnummer";          
+        }
+        if(newCaseTextFieldMisc.getText().equals("")){
+            failed += "\nYtterliggare information om brottet";          
+        }
+        if(dateFormat.format(newCaseSpinnerDate.getValue()).compareTo(dateFormat.format(new Date())) > 0){
+            failed += "\nEtt datum som inte är i framtiden";  
+        }
+        if(!failed.equals("")){
+            JOptionPane.showMessageDialog(null, "Var god mata in: " + failed); 
+            return;
+        }
         int id = caseHandler.addCase(newCaseTextFieldLocation.getText(), newCaseTextFieldViolationType.getText(), 
-                dateFormat.format(newCaseSpinnerDate.getValue()), newCaseTextFieldCitizenName.getText(), newCaseTextFieldCitizenTele.getText(), newCaseTextFieldMisc.getText());
+                dateFormat.format(newCaseSpinnerDate.getValue()), newCaseTextFieldCitizenName.getText(), 
+                newCaseTextFieldCitizenTele.getText(), newCaseTextFieldMisc.getText());
         dialogNewCase.setVisible(false);
         clearNewCaseDialog();
         updateCaseList();
@@ -675,24 +699,39 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_newCaseButtonSaveCaseActionPerformed
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonLoginActionPerformed
-        dialogLogIn.dispose();
-        setVisible(true); 
-//        if(caseHandler.login(loginTextFieldUsername.getText(), loginPasswordField.getPassword())){
-//            dialogLogIn.dispose();
-//            if(caseHandler.getUserType().equals(UserTypeE.CASEWORKER) || caseHandler.getUserType().equals(UserTypeE.SUPERVISOR)){
-//                buttonAddCase.setVisible(false);
-//            } else {
-//                buttonAddCase.setVisible(true);
-//            }
-//            if (caseHandler.getUserType().equals(UserTypeE.COORDINATOR)) {
-//                buttonChangeDepartment.setVisible(true);
-//            } else {
-//                buttonChangeDepartment.setVisible(false);
-//            }
-//            setVisible(true);      
-//        }else {
-//            JOptionPane.showMessageDialog(null, "Ogiltigt användarnamn eller lösenord.\nVar god försök igen.");            
-//        }
+        String failed = ""; 
+        if(loginTextFieldUsername.getText().equals("")){
+            failed += "\nAnvändarnamn";          
+        }
+        if(loginPasswordField.getPassword().length == 0){
+            failed += "\nLösenord";          
+        }       
+        if(!failed.equals("")){
+            JOptionPane.showMessageDialog(null, "Var god mata in: " + failed); 
+            return;
+        }
+        if(caseHandler.login(loginTextFieldUsername.getText(), loginPasswordField.getPassword())){
+            dialogLogIn.dispose();
+            loginTextFieldUsername.setText(null);
+            loginPasswordField.setText(null);
+            if (caseHandler.getUserType().equals(UserTypeE.COORDINATOR)) {
+                showDetailsComboBoxDepartment.setEnabled(true);
+                buttonAddCase.setVisible(true);
+                showDetailsButtonCloseCase.setVisible(false);
+            } else if (caseHandler.getUserType().equals(UserTypeE.SUPERVISOR)){
+                showDetailsComboBoxDepartment.setEnabled(false);
+                buttonAddCase.setVisible(false);
+                showDetailsButtonCloseCase.setVisible(true);
+            } else {
+                showDetailsComboBoxDepartment.setEnabled(false);
+                buttonAddCase.setVisible(false);
+                showDetailsButtonCloseCase.setVisible(false);
+            }
+            setVisible(true); 
+            updateCaseList();
+        }else {
+            JOptionPane.showMessageDialog(null, "Ogiltigt användarnamn eller lösenord.\nVar god försök igen.");            
+        }
     }//GEN-LAST:event_loginButtonLoginActionPerformed
 
     private void loginButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonExitActionPerformed
@@ -704,30 +743,29 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_dialogLogInWindowClosing
 
     private void showDetailsButtonSaveCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDetailsButtonSaveCaseActionPerformed
-        activeCase.setMisc(showDetailsTextFieldMisc.getText());
-        activeCase.setDepartment((String) departmentSpinner.getValue());
-        caseHandler.saveCase(activeCase);
-        JOptionPane.showMessageDialog(null, "Info sparad");  
+        if(!(activeCase.getMisc().equals(showDetailsTextFieldMisc.getText())) ||
+                !(activeCase.getDepartment().equals(showDetailsComboBoxDepartment.getSelectedItem()))){
+            caseHandler.saveCase(activeCase, (DepartmentsE)showDetailsComboBoxDepartment.getSelectedItem(), showDetailsTextFieldMisc.getText());
+            JOptionPane.showMessageDialog(null, "Info sparad"); 
+        }                      
         dialogShowDetails.setVisible(false);
     }//GEN-LAST:event_showDetailsButtonSaveCaseActionPerformed
 
     private void dialogLogInWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_dialogLogInWindowOpened
-        model = (DefaultTableModel) caseTable.getModel(); // move this ##################################   
+        model = (DefaultTableModel) caseTable.getModel(); 
         setTableHeaders();
         clearTable();
     }//GEN-LAST:event_dialogLogInWindowOpened
 
-    private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
+    private void menuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLogoutActionPerformed
         int response = JOptionPane.showConfirmDialog(null, "Vill du logga ut?", 
                 null, JOptionPane.CANCEL_OPTION);
         if (response == JOptionPane.OK_OPTION) {
             caseHandler.confirmLogout();
-            setVisible(false);
-            loginTextFieldUsername.setText(null);
-            loginPasswordField.setText(null);
+            setVisible(false);            
             dialogLogIn.setVisible(true);
         }
-    }//GEN-LAST:event_jMenuItemLogoutActionPerformed
+    }//GEN-LAST:event_menuItemLogoutActionPerformed
 
     private void showDetailsButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDetailsButtonCancelActionPerformed
         dialogShowDetails.dispose();
@@ -736,6 +774,32 @@ public class GUI extends javax.swing.JFrame {
     private void newCaseButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCaseButtonCancelActionPerformed
         dialogNewCase.dispose();
     }//GEN-LAST:event_newCaseButtonCancelActionPerformed
+
+    private void showDetailsButtonCloseCaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDetailsButtonCloseCaseActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Vill du verkligen avsluta ärendet?",
+            null, JOptionPane.CANCEL_OPTION);
+        if (response == JOptionPane.OK_OPTION) {
+            caseHandler.deleteCase(activeCase);
+            dialogShowDetails.setVisible(false);
+            updateCaseList();
+        }
+    }//GEN-LAST:event_showDetailsButtonCloseCaseActionPerformed
+
+    private void buttonHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHelpActionPerformed
+        JOptionPane.showMessageDialog(null, "Välkommen till prototypen av Miljöboven\n"
+                + "Logga in med följande användrnam och lösenord:\n"
+                + "johan\tpassword\tMiljösammordnare\n"
+                + "kristoffer\tpassword\tHandläggare\n"
+                + "millan\tpassword\tAvdelningschef\n"); 
+    }//GEN-LAST:event_buttonHelpActionPerformed
+
+    private void menuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAboutActionPerformed
+        JOptionPane.showMessageDialog(null, "Info om miljöboven v1.0"); 
+    }//GEN-LAST:event_menuItemAboutActionPerformed
+
+    private void menuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemHelpActionPerformed
+        JOptionPane.showMessageDialog(null, "Hjälp för miljöboven"); 
+    }//GEN-LAST:event_menuItemHelpActionPerformed
     
     private void clearNewCaseDialog(){
         newCaseTextFieldCitizenName.setText(null);
@@ -762,7 +826,7 @@ public class GUI extends javax.swing.JFrame {
     
     private void updateCaseList(){        
         clearTable();
-        ArrayList<Case> list = caseHandler.showCases();
+        ArrayList<Case> list = caseHandler.getCaseList();
         for (Case c : list){
             Vector row = new Vector(); 
             row.add(c.getCaseID());
@@ -771,6 +835,17 @@ public class GUI extends javax.swing.JFrame {
             row.add(c.getViolationType());
             model.addRow(row);
         }     
+    }
+    
+    private void addTestCases(){        
+        int ID = caseHandler.addCase("Kungsgatan 2", "Miljöförstörelse", "04-04-2015", 
+                "Jan Andersson", "0731234560", "farligt avfall i soporna");
+        caseHandler.saveCase(caseHandler.getCase(ID), DepartmentsE.SANITATION, 
+                caseHandler.getCase(ID).getMisc());
+        ID = caseHandler.addCase("Yttervägen 8", "Skogsförstörelse", "06-01-2015", 
+                "Anna Karlsson", "0731234785", "Islagna kopparspsikar i träd");
+        caseHandler.saveCase(caseHandler.getCase(ID), DepartmentsE.FORESTRY, 
+                caseHandler.getCase(ID).getMisc());
     }
     
     /**
@@ -810,8 +885,8 @@ public class GUI extends javax.swing.JFrame {
                 gui.dialogLogIn.setLocationRelativeTo(null); 
                 gui.dialogNewCase.setLocationRelativeTo(null);
                 gui.dialogShowDetails.setLocationRelativeTo(null);
-                gui.dialogLogIn.setVisible(true);    
-                //gui.showDetailsComboBoxDepartment.set(DepartmentsE.CLIMAT.toString());
+                gui.dialogLogIn.setVisible(true); 
+                gui.addTestCases();
             }
         });
 
@@ -820,17 +895,12 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button buttonAddCase;
+    private javax.swing.JButton buttonHelp;
     private java.awt.Button buttonShowDetails;
     private javax.swing.JTable caseTable;
-    private javax.swing.JPanel changeDepartmentPanelDepartment1;
-    private javax.swing.JSpinner departmentSpinner;
-    private javax.swing.JSpinner departmentSpinner1;
     private javax.swing.JDialog dialogLogIn;
     private javax.swing.JDialog dialogNewCase;
     private javax.swing.JDialog dialogShowDetails;
-    private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemHelp;
-    private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loginButtonExit;
     private javax.swing.JButton loginButtonLogin;
@@ -842,6 +912,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBarTop;
     private javax.swing.JMenu menuFile;
     private javax.swing.JMenu menuHelp;
+    private javax.swing.JMenuItem menuItemAbout;
+    private javax.swing.JMenuItem menuItemHelp;
+    private javax.swing.JMenuItem menuItemLogout;
     private javax.swing.JButton newCaseButtonCancel;
     private javax.swing.JButton newCaseButtonSaveCase;
     private javax.swing.JPanel newCasePanelCitizen;
@@ -857,6 +930,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextArea newCaseTextFieldMisc;
     private javax.swing.JTextField newCaseTextFieldViolationType;
     private javax.swing.JButton showDetailsButtonCancel;
+    private javax.swing.JButton showDetailsButtonCloseCase;
     private javax.swing.JButton showDetailsButtonSaveCase;
     private javax.swing.JComboBox showDetailsComboBoxDepartment;
     private javax.swing.JPanel showDetailsPanelCitizen;

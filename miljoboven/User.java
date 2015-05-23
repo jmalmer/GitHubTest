@@ -13,6 +13,7 @@ public class User {
     private final String username;
     private char[] password;
     private UserTypeE userType;
+    private DepartmentsE department;
     
     /**
      * Constructs a new User object with username, password and userType.
@@ -21,11 +22,13 @@ public class User {
      * @param username The User's username
      * @param password The User's password
      * @param userType The User type to get correct access
+     * @param department The User's department
      */
-    public User(String username, char[] password, UserTypeE userType) {
+    public User(String username, char[] password, UserTypeE userType, DepartmentsE department) {
         this.username = username;
         this.password = password.clone();
         this.userType = userType;
+        this.department = department;
     }
     
     /**
@@ -51,6 +54,14 @@ public class User {
      */
     public UserTypeE getUserType() {
         return userType;
+    }
+    
+    /**
+     * Gets the department of the user
+     * @return department
+     */
+    public DepartmentsE getDepartment() {
+        return department;
     }
         
 }
